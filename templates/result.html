@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Soil Classifier Result</title>
+</head>
+<body>
+    <h1>Soil Classifier Result</h1>
+    <p>Predicted Soil: {{ soil_name }}</p>
+    <p>Recommended Crops: {{ recommended_crops | join(', ') }}</p>
+    <p><a href="/">Classify Another</a></p>
+</body>
+</html>
