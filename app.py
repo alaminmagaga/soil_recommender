@@ -1,6 +1,5 @@
 import os
 from tensorflow.keras.preprocessing import image
-import matplotlib.pyplot as plt
 import numpy as np
 import os
 from flask import Flask, request, render_template
