@@ -2,10 +2,12 @@ import os
 from tensorflow.keras.preprocessing import image
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
-
+env_config = os.getenv("PROD_APP_SETTINGS", "config.DevelopmentConfig")
+app.config.from_object(env_config)
 # Define the target size for the images
 target_size = (220, 220)  # Adjust this size as needed
 
@@ -30,8 +32,12 @@ def classify_soil():
     if request.method == 'POST':
         uploaded_file = request.files['file']
         if uploaded_file.filename != '':
+            # Ensure that the "uploads" directory exists
+            uploads_dir = os.path.join(app.root_path, 'uploads')
+            os.makedirs(uploads_dir, exist_ok=True)
+
             # Save the uploaded file
-            file_path = os.path.join('uploads', uploaded_file.filename)
+            file_path = os.path.join(uploads_dir, uploaded_file.filename)
             uploaded_file.save(file_path)
 
             # Load the image and apply rescaling
